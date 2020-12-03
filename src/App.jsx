@@ -2,6 +2,7 @@ import { InsertInvitation } from '@material-ui/icons';
 import React from 'react';
 import defaultDataset from './dataset';
 import './assets/styles/style.css'
+import {AnswersList} from './components/index';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -14,12 +15,26 @@ export default class App extends React.Component {
         open: false
     }
   }
+
+  initAnswer = () => {
+    const initDataset = this.state.dataset[this.state.currentId];
+    const initAnswers = initDataset.answers;
+ 
+    this.setState({
+      answers : initAnswers
+    })
+  }
+
+  componentDidMount(){
+    this.initAnswer()
+  }
+
   render(){
     return (
     
       <section className="c-section">
         <div className="c-box">
-          {this.state.currentId}
+          <AnswersList answers={this.state.answers} />
         </div>
       </section>
 
