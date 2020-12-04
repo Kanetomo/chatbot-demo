@@ -2,7 +2,7 @@ import { InsertInvitation } from '@material-ui/icons';
 import React from 'react';
 import defaultDataset from './dataset';
 import './assets/styles/style.css'
-import {AnswersList} from './components/index';
+import {AnswersList, Chats} from './components/index';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -25,7 +25,25 @@ export default class App extends React.Component {
     })
   }
 
+  initChats = () => {
+    const initDataset = this.state.dataset[this.state.currentId];
+    const chat = {
+      text:  initDataset.question,
+      type: 'question'
+    }
+
+    const chats = this.state.chats;
+    chats.push(chat)
+ 
+    this.setState({
+      chats : chats
+    })
+  }
+
+  
+
   componentDidMount(){
+    this.initChats();   
     this.initAnswer()
   }
 
@@ -34,6 +52,7 @@ export default class App extends React.Component {
     
       <section className="c-section">
         <div className="c-box">
+          <Chats chats={this.state.chats}/>
           <AnswersList answers={this.state.answers} />
         </div>
       </section>
