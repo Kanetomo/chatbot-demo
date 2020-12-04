@@ -13,7 +13,9 @@ const Answer = (props) => {
     // const classes = useStyles();
     
     return(
-        <Button variant="contained" color="primary">{props.content}</Button>
+        <Button variant="contained" color="primary" onClick={() => props.select(props.content, props.nextId)}>
+            {props.content}
+        </Button>
     )
 }
 

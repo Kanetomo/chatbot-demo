@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 const Chats = (props) => {
-    const classes = useStyles;
+    const classes = useStyles();
 
     return(
         <List className={classes.root}>
