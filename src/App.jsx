@@ -15,6 +15,8 @@ export default class App extends React.Component {
         open: false
     }
     this.selectAnswer = this.selectAnswer.bind(this)
+    this.handleClickOpen = this.handleClickOpen.bind(this)
+    this.handleClose = this.handleClose.bind(this)
   }
 
   displayNextQuestion = (nextQuestionId) => {
@@ -36,12 +38,18 @@ export default class App extends React.Component {
       case(nextQuestionId === 'init'):
         this.displayNextQuestion(nextQuestionId)
         break;
+
+      case (nextQuestionId === 'contact'):
+        this.handleClickOpen();
+        break;
+
       case (/^https:*/.test(nextQuestionId)):
         const a = document.createElement('a');
         a.href = nextQuestionId;
         a.target = '_blank';
         a.click();
         break;
+        
       default:
         const chats = this.state.chats;
         chats.push({
@@ -57,6 +65,15 @@ export default class App extends React.Component {
         break;
     }
   }
+
+  handleClickOpen = () => {
+    this.setState({open: true});
+  };
+
+  handleClose = () => {
+      this.setState({open: false});
+  };
+
 
 
   componentDidMount(){
@@ -77,6 +94,7 @@ export default class App extends React.Component {
         <div className="c-box">
           <Chats chats={this.state.chats}/>
           <AnswersList answers={this.state.answers} select={this.selectAnswer} />
+          <FormDialog open={this.state.open} handleClose={this.handleClose} />
         </div>
       </section>
 
